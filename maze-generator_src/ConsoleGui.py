@@ -2,15 +2,37 @@ from RectangleMaze import RectangleMaze
 from Room import Room
 import random
 
+
 class Console:
     @staticmethod
     def get_option(message: str, options: dict):
         Console.print(message)
         options_set = dict(zip([i for i in range(1, len(options) + 1)], options.keys()))
         Console.print(*['({}) {}'.format(str(number), str(option)) for number, option in options_set.items()], sep='\n')
-        idx = int(input())
+        try:
+            idx = int(input())
+        except ValueError:
+            Console.print("Invalid input, you should type one of these:")
+            Console.print(*options_set.keys())
+            return Console.get_option("", options)
+
+        if idx not in options_set.keys():
+            Console.print("Invalid input, you should type one of these:")
+            Console.print(*options_set.keys())
+            return Console.get_option("", options)
 
         return options[options_set[idx]]
+
+    @staticmethod
+    def get_point(message: str) -> (int, int):
+        Console.print(message)
+        try:
+            x, y = map(int, input().split())
+        except ValueError:
+            Console.print("Invalid input, you should type two integers")
+            return Console.get_point("")
+
+        return x, y
 
     @staticmethod
     def print(*args, **kwargs) -> None:

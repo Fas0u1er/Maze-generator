@@ -28,13 +28,10 @@ def process_new_maze(arg: str) -> None:
         Console.print_rectangle_maze(maze, pathColour, wallColour)
 
     def show_path(tree: Graph) -> None:
-        Console.print('Choose two points')
+        Console.print('Choose two points, 1-indexation, first width, second height')
 
-        Console.print('Start:')
-        i, j = map(int, input().split())
-
-        Console.print('Finish:')
-        k, l = map(int, input().split())
+        i, j = Console.get_point('Start:')
+        k, l = Console.get_point('Finish:')
 
         from_ = (j - 1) * m + (i - 1)
         to_ = (l - 1) * m + (k - 1)
@@ -47,13 +44,10 @@ def process_new_maze(arg: str) -> None:
         tree.clear_marks()
 
     def animate_path(tree: Graph) -> None:
-        Console.print('Choose two points')
+        Console.print('Choose two points, 1-indexation, first width, second height')
 
-        Console.print('Start:')
-        i, j = map(int, input().split())
-
-        Console.print('Finish:')
-        k, l = map(int, input().split())
+        i, j = Console.get_point('Start:')
+        k, l = Console.get_point('Finish:')
 
         from_ = (j - 1) * m + (i - 1)
         to_ = (l - 1) * m + (k - 1)
@@ -73,7 +67,7 @@ def process_new_maze(arg: str) -> None:
             tree.mark_start_and_finish(from_, to_)
             tree.mark_path(from_, u)
             show_maze(tree)
-            time.sleep(0.15)
+            time.sleep(0.1)
             tree.clear_marks()
 
     def exit_(tree: Graph) -> None:
@@ -117,14 +111,18 @@ def process_new_maze(arg: str) -> None:
                 's': 2,
                 'a': 3,
             }
+            if c == '\x1b':
+                return -1
+
+            if c == '\x1a' or c == '\x18':
+                exit_(g)
+
             return direction[c]
 
-        Console.print('Choose two points')
-        Console.print('Start:')
-        i, j = map(int, input().split())
+        Console.print('Choose two points, 1-indexation, first width, second height')
 
-        Console.print('Finish:')
-        k, l = map(int, input().split())
+        i, j = Console.get_point('Start:')
+        k, l = Console.get_point('Finish:')
 
         from_ = (j - 1) * m + (i - 1)
         to_ = (l - 1) * m + (k - 1)
@@ -137,6 +135,7 @@ def process_new_maze(arg: str) -> None:
         tin = datetime.now()
         while True:
             system('clear')
+            Console.print('Use WASD to control your movements, or Esc to leave')
             Console.print_rectangle_maze(maze, pathColour, wallColour)
             direction = get_dir()
             inFinish = maze.make_turn(direction)
@@ -177,11 +176,7 @@ def process_new_maze(arg: str) -> None:
         system('clear')
         Console.print('You chose ' + arg + ' algorithm to make maze. Now set width, height and colour theme.')
 
-        Console.print('Width:')
-        m = int(input())
-
-        Console.print('Height:')
-        n = int(input())
+        m, n = Console.get_point("Type width and height:")
 
         wallColour, pathColour = Console.get_option('Theme:', themes)
 
@@ -202,6 +197,8 @@ def process_new_maze(arg: str) -> None:
     Console.print("Maze is ready!")
 
     while True:
+        Console.print("Width: ", m)
+        Console.print("Height: ", n)
         Console.get_option("What do you want to do next?", options_with_maze)(g)
 
 
