@@ -138,6 +138,9 @@ def process_new_maze(arg: str) -> None:
             Console.print('Use WASD to control your movements, or Esc to leave')
             Console.print_rectangle_maze(maze, pathColour, wallColour)
             direction = get_dir()
+            if direction == -1:
+                return
+
             inFinish = maze.make_turn(direction)
 
             if inFinish:
@@ -155,8 +158,7 @@ def process_new_maze(arg: str) -> None:
         'Doom': (196, 208),
         'Cosmos': (99, 123),
         'B&W': (15, 15),
-        'Chaos': (-1, -1),
-
+        'Chaos': (-1, -1)
     }
 
     options_with_maze = {
@@ -174,9 +176,9 @@ def process_new_maze(arg: str) -> None:
         construct_tree = tree_maker[arg]
 
         system('clear')
-        Console.print('You chose ' + arg + ' algorithm to make maze. Now set width, height and colour theme.')
+        Console.print('You have chosen ' + arg + ' algorithm to make maze. Now set width, height and colour theme.')
 
-        m, n = Console.get_point("Type width and height:")
+        m, n = Console.get_point("Type width and height:\n(normally not more than 30 and 15 respectively)")
 
         wallColour, pathColour = Console.get_option('Theme:', themes)
 

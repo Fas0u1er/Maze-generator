@@ -137,6 +137,7 @@ class Graph:
             v.set_parent = v.idx
             v.set_size = 1
 
+        # DSU functions:
         def get_set_head(v: int) -> int:
             while self.nodes[v].set_parent != v:
                 v = self.nodes[v].set_parent
@@ -157,4 +158,3 @@ class Graph:
             self.nodes[u].treeSons.append(v)
             self.nodes[v].treeSons.append(u)
             union(head1, head2)
-
