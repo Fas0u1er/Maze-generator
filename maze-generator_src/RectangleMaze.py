@@ -12,6 +12,14 @@ class RectangleMaze:
         self.path_start = None
         self.current_player_pos = None
 
+    def set_current_player_pos(self, pos):
+        self.current_player_pos = pos
+        i, j = pos
+        self.grid[i][j].state = '⊛'
+
+    def get_current_player_pos(self):
+        return self.current_player_pos
+
     def build_on_graph(self, graph: Graph) -> None:
         m = self.width
         n = self.height

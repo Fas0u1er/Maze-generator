@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+
+{% block input %}
+<p>Please, choose parameters of your new maze:</p>
+<form method="post">
+
+  <div class="row">
+	<div class="col">
+		<input type="number" name="width" placeholder="Width" />
+	</div>
+	<div class="col">
+		<input type="text" name="new name" placeholder="Name" />
+	</div>
+  </div>
+	<p>
+	<div class="row">
+		<div class="col">
+			<input type="number" name="height" placeholder="Height" />
+		</div>
+
+	<div class="col">
+			Build algorithm <select name="algo">
+			<option>dfs</option>
+			<option>bfs</option>
+			<option>kruskal</option>
+			</select>
+		</div>
+	  </div>
+	</p>
+
+	<input type="submit" class="btn btn-primary btn-lg" name="new maze" value="Get new maze"/>
+</form>
+
+<div  style="padding: 5% 0%;">
+	<p>If you have saved mazes you may pick them</p>
+	<form method="post">
+		<p><input type="text" name="existing name" placeholder="Name of your maze"/></p>
+		<p><input type="submit" class="btn btn-secondary btn-lg" name="existing name" value="Get my maze"/></p>
+	</form>
+</div>
+
+{% endblock %}

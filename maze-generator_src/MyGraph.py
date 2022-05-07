@@ -8,15 +8,21 @@ class Graph:
         self.path_start = None
         self.path_finish = None
         self.nodes = [Node() for _ in range(size)]
+        self.parameters = (0, 0)
         cnt = 0
         for u in self.nodes:
             u.idx = cnt
             cnt += 1
 
+    def get_parameters(self) -> (int, int):
+        return self.parameters
+
     def construct_from_rectangle(self, width: int, height: int) -> None:
         m = width
         n = height
         self.__init__(n * m)
+        self.parameters = (m, n)
+
         for i in range(n):
             for j in range(m):
                 if 0 <= j + 1 < m:
@@ -32,6 +38,8 @@ class Graph:
         m = (len(txt[0]) - 1) // 2
         n = (len(txt) - 1) // 2
         self.__init__(n * m)
+        self.parameters = (m, n)
+
         for i in range(n):
             for j in range(m):
                 if 0 <= j + 1 < m and txt[2 * i + 1][2 * j + 2] == ' ':
@@ -158,3 +166,8 @@ class Graph:
             self.nodes[u].treeSons.append(v)
             self.nodes[v].treeSons.append(u)
             union(head1, head2)
+
+
+tree_maker = {'dfs': Graph.make_tree_dfs,
+              'bfs': Graph.make_tree_bfs,
+              'kruskal': Graph.make_tree_kruskal}

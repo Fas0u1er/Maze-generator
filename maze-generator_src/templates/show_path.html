@@ -1,0 +1,22 @@
+{% extends "base_with_maze.html" %}
+
+{% block input %}
+Choose start and finish, 1-indexation
+<form method="post">
+    <div class="input-group">
+        <div class="form-row">
+            <input type="number" class="form-control" name="x1" placeholder="start x"/>
+            <input type="number" class="form-control" name="x2" placeholder="finish x"/>
+        </div>
+
+        <div class="form-row">
+            <input type="number" class="form-control" name="y1" placeholder="start y"/>
+            <input type="number" class="form-control" name="y2" placeholder="finish y"/>
+        </div>
+    </div>
+
+    <p><input type="submit" class="btn btn-success btn-lg" value="submit"/></p>
+    <p><input type="submit" class="btn btn-outline-dark btn-lg" name="exit" value="exit"/></p>
+</form>
+
+{% endblock %}

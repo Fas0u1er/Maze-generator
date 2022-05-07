@@ -1,0 +1,28 @@
+{% extends "base_with_maze.html" %}
+
+{% block input %}
+What do you want to do with maze?
+<form method="post">
+
+
+
+
+  <div class="row">
+	<div class="col">
+		<p><input type="submit" class="btn btn-primary btn-lg" name="show path" value="show path"/></p>
+	</div>
+	<div class="col">
+		<p><input type="submit" class="btn btn-success btn-lg" name="save maze" value="save maze"/></p>
+	</div>
+  </div>
+
+  <div class="row">
+	<div class="col">
+		<p><input type="submit" class="btn btn-primary btn-lg" name="play" value="play"/></p>
+	</div>
+	<div class="col">
+		<p><input type="submit" class="btn btn-outline-dark btn-lg" name="discard maze" value="discard maze"/></p>
+	</div>
+  </div>
+</form>
+{% endblock %}
