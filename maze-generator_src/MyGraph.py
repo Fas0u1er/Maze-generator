@@ -34,23 +34,6 @@ class Graph:
                 if 0 <= i - 1 < n:
                     self.nodes[m * i + j].adj.append(m * (i - 1) + j)
 
-    def construct_from_rectangle_txt(self, txt: [[str]]) -> None:
-        m = (len(txt[0]) - 1) // 2
-        n = (len(txt) - 1) // 2
-        self.__init__(n * m)
-        self.parameters = (m, n)
-
-        for i in range(n):
-            for j in range(m):
-                if 0 <= j + 1 < m and txt[2 * i + 1][2 * j + 2] == ' ':
-                    self.nodes[m * i + j].adj.append(m * i + j + 1)
-                if 0 <= j - 1 < m and txt[2 * i + 1][2 * j] == ' ':
-                    self.nodes[m * i + j].adj.append(m * i + j - 1)
-                if 0 <= i + 1 < n and txt[2 * i + 2][2 * j + 1] == ' ':
-                    self.nodes[m * i + j].adj.append(m * (i + 1) + j)
-                if 0 <= i - 1 < n and txt[2 * i][2 * j + 1] == ' ':
-                    self.nodes[m * i + j].adj.append(m * (i - 1) + j)
-
     def make_tree_dfs(self) -> None:
         self._dfs(random.randint(0, len(self.nodes) - 1))
         for v in self.nodes:
@@ -73,10 +56,6 @@ class Graph:
             v.treeParent = -1
             #     to make tree-structure
         self._dfs(random.randint(0, len(self.nodes)))
-
-    def mark_start_and_finish(self, from_: int, to_: int) -> None:
-        self.path_start = from_
-        self.path_finish = to_
 
     def mark_path(self, from_: int, to_: int) -> None:
         u = from_

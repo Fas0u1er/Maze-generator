@@ -123,10 +123,6 @@ class RectangleMaze:
                         output[2 * i][2 * j] = remove_wall(output[2 * i][2 * j], 2)
         return output
 
-    def start_run(self) -> None:
-        i, j = self.path_start
-        self.current_player_pos = (i, j)
-        self.grid[i][j].state = '⊛'
 
     def make_turn(self, direction: int) -> bool:
         i, j = self.current_player_pos
