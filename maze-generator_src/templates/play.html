@@ -1,0 +1,41 @@
+{% extends "base_with_maze.html" %}
+
+{% block input %}
+<p>Use WASD to wander about</p>
+
+<form method="post">
+	<p><input id="up" type="submit" class="btn btn-success btn-lg" name="up" value="up" hidden/></p>
+	<p><input id="down" type="submit" class="btn btn-success btn-lg"  name="down" value="down" hidden/></p>
+	<p><input id="left" type="submit" class="btn btn-success btn-lg" name="left" value="left" hidden/></p>
+	<p><input id="right" type="submit" class="btn btn-success btn-lg"  name="right" value="right" hidden/></p>
+</form>
+
+<script>
+var input = document.getElementById("page");
+input.addEventListener("keypress", function(event) {
+  if (event.key === "w" || event.key === "W") {
+    document.getElementById("up").click();
+  }
+
+  if (event.key === "a" || event.key === "A") {
+    document.getElementById("left").click();
+  }
+
+  if (event.key === "s" || event.key === "S") {
+    document.getElementById("down").click();
+  }
+
+  if (event.key === "d" || event.key === "D") {
+    document.getElementById("right").click();
+  }
+});
+</script>
+
+
+</script>
+
+<form method="post">
+	<p><input type="submit" class="btn btn-outline-dark btn-lg" name="exit" value="exit"/></p>
+</form>
+
+{% endblock %}

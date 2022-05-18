@@ -1,2 +1,3 @@
 #!/bin/bash
-python3 maze-generator_src/main.py "$@"
+cd maze-generator_src
+python3 app.py

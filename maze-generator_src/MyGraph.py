@@ -8,15 +8,21 @@ class Graph:
         self.path_start = None
         self.path_finish = None
         self.nodes = [Node() for _ in range(size)]
+        self.parameters = (0, 0)
         cnt = 0
         for u in self.nodes:
             u.idx = cnt
             cnt += 1
 
+    def get_parameters(self) -> (int, int):
+        return self.parameters
+
     def construct_from_rectangle(self, width: int, height: int) -> None:
         m = width
         n = height
         self.__init__(n * m)
+        self.parameters = (m, n)
+
         for i in range(n):
             for j in range(m):
                 if 0 <= j + 1 < m:
@@ -26,21 +32,6 @@ class Graph:
                 if 0 <= i + 1 < n:
                     self.nodes[m * i + j].adj.append(m * (i + 1) + j)
                 if 0 <= i - 1 < n:
-                    self.nodes[m * i + j].adj.append(m * (i - 1) + j)
-
-    def construct_from_rectangle_txt(self, txt: [[str]]) -> None:
-        m = (len(txt[0]) - 1) // 2
-        n = (len(txt) - 1) // 2
-        self.__init__(n * m)
-        for i in range(n):
-            for j in range(m):
-                if 0 <= j + 1 < m and txt[2 * i + 1][2 * j + 2] == ' ':
-                    self.nodes[m * i + j].adj.append(m * i + j + 1)
-                if 0 <= j - 1 < m and txt[2 * i + 1][2 * j] == ' ':
-                    self.nodes[m * i + j].adj.append(m * i + j - 1)
-                if 0 <= i + 1 < n and txt[2 * i + 2][2 * j + 1] == ' ':
-                    self.nodes[m * i + j].adj.append(m * (i + 1) + j)
-                if 0 <= i - 1 < n and txt[2 * i][2 * j + 1] == ' ':
                     self.nodes[m * i + j].adj.append(m * (i - 1) + j)
 
     def make_tree_dfs(self) -> None:
@@ -65,10 +56,6 @@ class Graph:
             v.treeParent = -1
             #     to make tree-structure
         self._dfs(random.randint(0, len(self.nodes)))
-
-    def mark_start_and_finish(self, from_: int, to_: int) -> None:
-        self.path_start = from_
-        self.path_finish = to_
 
     def mark_path(self, from_: int, to_: int) -> None:
         u = from_
@@ -158,3 +145,8 @@ class Graph:
             self.nodes[u].treeSons.append(v)
             self.nodes[v].treeSons.append(u)
             union(head1, head2)
+
+
+tree_maker = {'dfs': Graph.make_tree_dfs,
+              'bfs': Graph.make_tree_bfs,
+              'kruskal': Graph.make_tree_kruskal}
